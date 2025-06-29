@@ -34,7 +34,7 @@ async def pm_search(client, message):
         files, n_offset, total = await get_search_results(message.text)
         btn = [[
             InlineKeyboardButton("🗂 ᴄʟɪᴄᴋ ʜᴇʀᴇ 🗂", url=FILMS_LINK)
-        ]]
+        ],[]]
         reply_markup=InlineKeyboardMarkup(btn)
         if int(total) != 0:
             await message.reply_text(f'<b><i>🤗 ᴛᴏᴛᴀʟ <code>{total}</code> ʀᴇꜱᴜʟᴛꜱ ꜰᴏᴜɴᴅ ɪɴ ᴛʜɪꜱ ɢʀᴏᴜᴘ 👇</i></b>\n\nor buy premium subscription', reply_markup=reply_markup)
@@ -153,13 +153,14 @@ async def next_page(bot, query):
             [InlineKeyboardButton("📰 ʟᴀɴɢᴜᴀɢᴇs", callback_data=f"languages#{key}#{req}#{offset}"),
             InlineKeyboardButton("🔍 ǫᴜᴀʟɪᴛʏ", callback_data=f"quality#{key}#{req}#{offset}")]
         )
-        
+        btn.insert(1,)]
+        )
     else:
         btn.insert(0,
             [InlineKeyboardButton("📰 ʟᴀɴɢᴜᴀɢᴇs", callback_data=f"languages#{key}#{req}#{offset}"),
             InlineKeyboardButton("🔍 ǫᴜᴀʟɪᴛʏ", callback_data=f"quality#{key}#{req}#{offset}")]
         )
-        
+        btn.insert(1,)
 
     if 0 < offset <= MAX_BTN:
         off_set = 0
@@ -185,7 +186,7 @@ async def next_page(bot, query):
                 InlineKeyboardButton("ɴᴇxᴛ »", callback_data=f"next_{req}_{key}_{n_offset}")
             ]
         )
-    
+    btn.append()
     await query.message.edit_text(cap + files_link + del_msg, reply_markup=InlineKeyboardMarkup(btn), disable_web_page_preview=True, parse_mode=enums.ParseMode.HTML)
 
 @Client.on_callback_query(filters.regex(r"^languages"))
@@ -246,13 +247,11 @@ async def filter_languages_cb_handler(client: Client, query: CallbackQuery):
             for file in files
         ]
     if settings['shortlink'] and not await is_premium(query.from_user.id, client):
-        btn.insert(1,
-            [InlineKeyboardButton("🔍 ǫᴜᴀʟɪᴛʏ", callback_data=f"quality#{key}#{req}#{offset}")]
+        btn.insert(1,),
+            InlineKeyboardButton("🔍 ǫᴜᴀʟɪᴛʏ", callback_data=f"quality#{key}#{req}#{offset}")]
         )
     else:
-        btn.insert(1,
-            
-            InlineKeyboardButton("🔍 ǫᴜᴀʟɪᴛʏ", callback_data=f"quality#{key}#{req}#{offset}")]
+        btn.insert(1,InlineKeyboardButton("🔍 ǫᴜᴀʟɪᴛʏ", callback_data=f"quality#{key}#{req}#{offset}")]
         )
     
     if l_offset != "":
@@ -299,13 +298,11 @@ async def lang_next_page(bot, query):
             for file in files
         ]
     if settings['shortlink'] and not await is_premium(query.from_user.id, bot):
-        btn.insert(1,
-            [InlineKeyboardButton("🔍 ǫᴜᴀʟɪᴛʏ", callback_data=f"quality#{key}#{req}#{l_offset}")]
+        btn.insert(1,),
+            InlineKeyboardButton("🔍 ǫᴜᴀʟɪᴛʏ", callback_data=f"quality#{key}#{req}#{l_offset}")]
         )
     else:
-        btn.insert(1,
-            
-            InlineKeyboardButton("🔍 ǫᴜᴀʟɪᴛʏ", callback_data=f"quality#{key}#{req}#{l_offset}")]
+        btn.insert(1,InlineKeyboardButton("🔍 ǫᴜᴀʟɪᴛʏ", callback_data=f"quality#{key}#{req}#{l_offset}")]
         )
     if 0 < l_offset <= MAX_BTN:
         b_offset = 0
@@ -361,9 +358,10 @@ async def quality_search(client: Client, query: CallbackQuery):
             for file in files
         ]
     if settings['shortlink'] and not await is_premium(query.from_user.id, client):
-        pass
+        btn.insert(0,)]
+        )
     else:
-        pass
+        btn.insert(0,)  
     if l_offset != "":
         btn.append(
             [InlineKeyboardButton(text=f"1/{math.ceil(int(total_results) / MAX_BTN)}", callback_data="buttons"),
@@ -408,9 +406,10 @@ async def quality_next_page(bot, query):
             for file in files
         ]
     if settings['shortlink'] and not await is_premium(query.from_user.id, bot):
-        
+        btn.insert(0,)]
+        )
     else:
-        
+        btn.insert(0,)
     if 0 < l_offset <= MAX_BTN:
         b_offset = 0
     elif l_offset == 0:
@@ -592,7 +591,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
             InlineKeyboardButton('👨‍🚒 ʜᴇʟᴘ', callback_data='help'),
             InlineKeyboardButton('🔎 ɪɴʟɪɴᴇ', switch_inline_query_current_chat=''),
             InlineKeyboardButton('📚 ᴀʙᴏᴜᴛ', callback_data='about')
-        ]]
+        ],[]]
         reply_markup = InlineKeyboardMarkup(buttons)
         await query.edit_message_media(
             InputMediaPhoto(random.choice(PICS), caption=script.START_TXT.format(query.from_user.mention, get_wish())),
@@ -951,16 +950,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
         await query.message.edit('Deleting...')
         deleted = await delete_files(query_)
         await query.message.edit(f'Deleted {deleted} files in your database in your query {query_}')
-     
-    elif query.data.startswith("send_all"):
-        ident, key, req = query.data.split("#")
-        if int(req) != query.from_user.id:
-            return await query.answer(f"Hello {query.from_user.first_name},\nDon't Click Other Results!", show_alert=True)        
-        files = temp.FILES.get(key)
-        if not files:
-            await query.answer(f"Hello {query.from_user.first_name},\nSend New Request Again!", show_alert=True)
-            return        
-        await query.answer(url=f"https://t.me/{temp.U_NAME}?start=all_{query.message.chat.id}_{key}")
+
 
     elif query.data == "unmute_all_members":
         if not await is_check_admin(client, query.message.chat.id, query.from_user.id):
@@ -1086,23 +1076,25 @@ async def auto_filter(client, msg, s, spoll=False):
                 [InlineKeyboardButton("📰 ʟᴀɴɢᴜᴀɢᴇs", callback_data=f"languages#{key}#{req}#{offset}"),
                 InlineKeyboardButton("🔍 ǫᴜᴀʟɪᴛʏ", callback_data=f"quality#{key}#{req}#{offset}")]
             )
-            
+            btn.insert(1,)]
+            )
         else:
             btn.insert(0,
                 [InlineKeyboardButton("📰 ʟᴀɴɢᴜᴀɢᴇs", callback_data=f"languages#{key}#{req}#{offset}"),
                 InlineKeyboardButton("🔍 ǫᴜᴀʟɪᴛʏ", callback_data=f"quality#{key}#{req}#{offset}")]
             )
-            
+            btn.insert(1,)
         btn.append(
             [InlineKeyboardButton(text=f"1/{math.ceil(int(total_results) / MAX_BTN)}", callback_data="buttons"),
              InlineKeyboardButton(text="ɴᴇxᴛ »", callback_data=f"next_{req}_{key}_{offset}")]
         )
     else:
         if settings['shortlink'] and not await is_premium(message.from_user.id, client):
-            pass
+            btn.insert(0,)]
+            )
         else:
-            pass
-    
+            btn.insert(0,)
+    btn.append()
     imdb = await get_poster(search, file=(files[0])['file_name']) if settings["imdb"] else None
     TEMPLATE = settings['template']
     if imdb:
@@ -1227,3 +1219,4 @@ async def advantage_spell_chok(message, s):
         await message.delete()
     except:
         pass
+
