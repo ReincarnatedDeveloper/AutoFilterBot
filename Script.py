@@ -6,7 +6,7 @@ class script(object):
 
     MY_ABOUT_TXT = """★ Server: <a href=https://www.heroku.com>Heroku</a>
 ★ Language: <a href=https://www.python.org>Python</a>
-★ Library: <a href=https://t.me/Eliteflix_Official>Scogram</a>"""
+★ Library: <a href=https://t.me/Eliteflix_Official>TPBL</a>"""
 
     MY_OWNER_TXT = """★ Name: HA Bots
 ★ Username: @Eliteflix_Official
