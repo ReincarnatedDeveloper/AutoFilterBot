@@ -361,9 +361,9 @@ async def quality_search(client: Client, query: CallbackQuery):
             for file in files
         ]
     if settings['shortlink'] and not await is_premium(query.from_user.id, client):
-        
+        pass
     else:
-         
+        pass
     if l_offset != "":
         btn.append(
             [InlineKeyboardButton(text=f"1/{math.ceil(int(total_results) / MAX_BTN)}", callback_data="buttons"),
@@ -1099,9 +1099,9 @@ async def auto_filter(client, msg, s, spoll=False):
         )
     else:
         if settings['shortlink'] and not await is_premium(message.from_user.id, client):
-            
+            pass
         else:
-            
+            pass
     
     imdb = await get_poster(search, file=(files[0])['file_name']) if settings["imdb"] else None
     TEMPLATE = settings['template']
