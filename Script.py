@@ -8,7 +8,7 @@ class script(object):
 ★ Language: <a href=https://www.python.org>Python</a>
 ★ Library: <a href=https://t.me/Eliteflix_Official>TPBL</a>"""
 
-    MY_OWNER_TXT = """★ Name: HA Bots
+    MY_OWNER_TXT = """★ Name: Eliteflix Bots
 ★ Username: @Eliteflix_Official
 ★ Country: INDIA ❤❤"""
 
@@ -114,7 +114,7 @@ Support: {}"""
 /connect - to connect group settings to PM
 /id - to check group or channel id</b>"""
     
-    SOURCE_TXT = """<b>Bot Code -
+    SOURCE_TXT = """<b>Bot Source Code -
 
 - ᴛʜɪꜱ ʙᴏᴛ ɪꜱ NOT AN OPEN ꜱᴏᴜʀᴄᴇ ᴘʀᴏᴊᴇᴄᴛ.
 
