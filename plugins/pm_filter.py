@@ -153,14 +153,14 @@ async def next_page(bot, query):
             [InlineKeyboardButton("📰 ʟᴀɴɢᴜᴀɢᴇs", callback_data=f"languages#{key}#{req}#{offset}"),
             InlineKeyboardButton("🔍 ǫᴜᴀʟɪᴛʏ", callback_data=f"quality#{key}#{req}#{offset}")]
         )
-        btn.insert(1,)]
+        
         )
     else:
         btn.insert(0,
             [InlineKeyboardButton("📰 ʟᴀɴɢᴜᴀɢᴇs", callback_data=f"languages#{key}#{req}#{offset}"),
             InlineKeyboardButton("🔍 ǫᴜᴀʟɪᴛʏ", callback_data=f"quality#{key}#{req}#{offset}")]
         )
-        btn.insert(1,)
+        
 
     if 0 < offset <= MAX_BTN:
         off_set = 0
@@ -247,7 +247,7 @@ async def filter_languages_cb_handler(client: Client, query: CallbackQuery):
             for file in files
         ]
     if settings['shortlink'] and not await is_premium(query.from_user.id, client):
-        btn.insert(1,),
+        ,
             InlineKeyboardButton("🔍 ǫᴜᴀʟɪᴛʏ", callback_data=f"quality#{key}#{req}#{offset}")]
         )
     else:
@@ -298,7 +298,7 @@ async def lang_next_page(bot, query):
             for file in files
         ]
     if settings['shortlink'] and not await is_premium(query.from_user.id, bot):
-        btn.insert(1,),
+        ,
             InlineKeyboardButton("🔍 ǫᴜᴀʟɪᴛʏ", callback_data=f"quality#{key}#{req}#{l_offset}")]
         )
     else:
@@ -358,10 +358,10 @@ async def quality_search(client: Client, query: CallbackQuery):
             for file in files
         ]
     if settings['shortlink'] and not await is_premium(query.from_user.id, client):
-        btn.insert(0,)]
+        
         )
     else:
-        btn.insert(0,)  
+          
     if l_offset != "":
         btn.append(
             [InlineKeyboardButton(text=f"1/{math.ceil(int(total_results) / MAX_BTN)}", callback_data="buttons"),
@@ -406,10 +406,10 @@ async def quality_next_page(bot, query):
             for file in files
         ]
     if settings['shortlink'] and not await is_premium(query.from_user.id, bot):
-        btn.insert(0,)]
+        
         )
     else:
-        btn.insert(0,)
+        
     if 0 < l_offset <= MAX_BTN:
         b_offset = 0
     elif l_offset == 0:
@@ -1076,24 +1076,24 @@ async def auto_filter(client, msg, s, spoll=False):
                 [InlineKeyboardButton("📰 ʟᴀɴɢᴜᴀɢᴇs", callback_data=f"languages#{key}#{req}#{offset}"),
                 InlineKeyboardButton("🔍 ǫᴜᴀʟɪᴛʏ", callback_data=f"quality#{key}#{req}#{offset}")]
             )
-            btn.insert(1,)]
+            
             )
         else:
             btn.insert(0,
                 [InlineKeyboardButton("📰 ʟᴀɴɢᴜᴀɢᴇs", callback_data=f"languages#{key}#{req}#{offset}"),
                 InlineKeyboardButton("🔍 ǫᴜᴀʟɪᴛʏ", callback_data=f"quality#{key}#{req}#{offset}")]
             )
-            btn.insert(1,)
+            
         btn.append(
             [InlineKeyboardButton(text=f"1/{math.ceil(int(total_results) / MAX_BTN)}", callback_data="buttons"),
              InlineKeyboardButton(text="ɴᴇxᴛ »", callback_data=f"next_{req}_{key}_{offset}")]
         )
     else:
         if settings['shortlink'] and not await is_premium(message.from_user.id, client):
-            btn.insert(0,)]
+            
             )
         else:
-            btn.insert(0,)
+            
     btn.append()
     imdb = await get_poster(search, file=(files[0])['file_name']) if settings["imdb"] else None
     TEMPLATE = settings['template']
