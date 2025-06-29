@@ -161,3 +161,4 @@ if len(UPI_ID) == 0 or len(UPI_NAME) == 0:
     
 #Auth FSub
 auth_channel = environ.get('AUTH_CHANNEL')
+AUTH_CHANNEL = int(auth_channel) if auth_channel and id_pattern.search(auth_channel) else None
