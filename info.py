@@ -159,3 +159,5 @@ if len(UPI_ID) == 0 or len(UPI_NAME) == 0:
     logger.info('IS_PREMIUM disabled due to empty UPI_ID or UPI_NAME')
     IS_PREMIUM = False
     
+#Auth FSub
+auth_channel = environ.get('AUTH_CHANNEL')
